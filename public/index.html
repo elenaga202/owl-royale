@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#f6c945">
+  <title>OWL ROYALE — La carrera del txakoli</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/controls.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <main id="app">
+    <section id="home" class="screen active">
+      <div class="hero">
+        <div class="eyebrow">UN ARCADE DE CUMPLEAÑOS</div>
+        <div class="mascot">🦉</div>
+        <h1>OWL <span>ROYALE</span></h1>
+        <p class="subtitle">La carrera del txakoli</p>
+        <p class="intro">Cuatro búhos. Una fiesta. Mucho txakoli por recoger.</p>
+        <div class="home-actions">
+          <button id="createBtn" class="btn primary">Crear partida</button>
+          <button id="showJoinBtn" class="btn secondary">Unirse a una sala</button>
+          <button id="displayBtn" class="text-btn">Abrir pantalla principal</button>
+          <button id="developerModeBtn" class="text-btn">Modo developer</button>
+        </div>
+        <div id="createOptions" class="create-options hidden">
+          <p>¿Cómo quieres participar en la sala?</p>
+          <button id="createPlayerBtn" class="btn secondary">Crear y jugar</button>
+          <button id="createViewerBtn" class="btn secondary">Crear solo como visor</button>
+          <button id="cancelCreate" class="text-btn">Cancelar</button>
+        </div>
+        <div id="developerOptions" class="developer-options hidden">
+          <p>Iniciar una partida de prueba al instante:</p>
+          <button id="developerPlayerBtn" class="btn secondary">Probar como jugador (joystick)</button>
+          <button id="developerViewerBtn" class="btn secondary">Probar solo el visor</button>
+        </div>
+      </div>
+      <form id="joinForm" class="join-card hidden">
+        <label>Tu nombre<input id="joinName" maxlength="16" placeholder="Ej. Schäfer" required></label>
+        <label>Código de sala<input id="roomCode" maxlength="5" placeholder="ABCDE" required></label>
+        <button class="btn primary" type="submit">Entrar en la sala</button>
+        <button id="cancelJoin" class="text-btn" type="button">Cancelar</button>
+      </form>
+    </section>
+
+    <section id="lobby" class="screen">
+      <div class="topline"><span class="brand">🦉 OWL ROYALE</span><span class="pill">SALA DE ESPERA</span></div>
+      <div class="lobby-layout">
+        <div class="lobby-main">
+          <p class="eyebrow">PREPARADOS, BÚHOS...</p>
+          <h2>¡Que empiece<br>la fiesta!</h2>
+          <p class="muted">Formad parejas: cada búho necesita un piloto vertical y otro horizontal. No hace falta llenar todos los búhos.</p>
+          <div class="code-box"><small>CÓDIGO DE SALA</small><strong id="lobbyCode">-----</strong><button id="copyCode" class="copy-btn">Copiar</button></div>
+          <div id="playerSlots" class="player-slots"></div>
+          <button id="startBtn" class="btn primary wide">¡Empezar partida!</button>
+          <p id="lobbyHint" class="hint">El anfitrión puede iniciar cuando todos estén listos.</p>
+        </div>
+        <aside class="qr-panel">
+          <div class="qr-placeholder" id="qrBox"><span>📱</span><b>ENTRA DESDE TU MÓVIL</b><small>Abre esta misma web e introduce el código</small></div>
+          <p>También puedes compartir el enlace de esta página y el código de sala.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="controller" class="screen controller-screen">
+      <div class="controller-head">
+        <span class="brand">🦉 OWL ROYALE</span>
+        <span id="controllerRoom" class="pill">SALA -----</span>
+      </div>
+      <div class="controller-info">
+        <div><small>PILOTO</small><strong id="myName">Piloto</strong><small id="myRole">PILOTO VERTICAL</small></div>
+        <div><small>TU BÚHO</small><strong id="myTeam">Búho amarillo</strong><small>PUNTOS <b id="myScore">0</b></small></div>
+      </div>
+      <div id="waitingController" class="waiting-card">
+        <div class="big-owl">🦉</div><h2>¡Ya estás dentro!</h2>
+        <p>Tu plaza se asignará automáticamente. Cada búho necesita dos pilotos: uno vertical y otro horizontal.</p>
+        <button id="readyBtn" class="btn primary">Estoy listo</button>
+        <p id="readyStatus" class="hint">Aún no has confirmado.</p>
+      </div>
+      <div id="playingController" class="playing-controller hidden">
+        <div class="mobile-game-hud"><strong id="controllerCountdown">¡A JUGAR!</strong><div id="playerScoreboard" class="scoreboard"></div></div>
+        <div class="mobile-arena-wrap">
+          <canvas id="playerArena" width="800" height="496"></canvas>
+          <button class="fullscreen-btn" type="button" aria-label="Activar pantalla completa" aria-pressed="false" title="Pantalla completa">⛶</button>
+          <div class="joystick axis-vertical" id="joystick"><div class="axis-guide">↕</div><div class="stick" id="stick"></div></div>
+        </div>
+        <div id="joystickInstruction" class="joystick-instruction">TÚ CONTROLAS ARRIBA Y ABAJO</div>
+        <div class="controller-tip">¡Coordínate con tu compañero! Recoged notas, discos y txakoli.</div>
+      </div>
+      <div id="finishedController" class="waiting-card hidden"><div class="big-owl">🏆</div><h2>¡Partida terminada!</h2><p>Mira la pantalla principal para descubrir quién ha ganado.</p></div>
+    </section>
+
+    <section id="display" class="screen display-screen">
+      <header class="display-head"><div><span class="brand">🦉 OWL ROYALE</span><small>LA CARRERA DEL TXAKOLI</small></div><div id="displayCode" class="display-code">SALA -----</div></header>
+      <div id="displayLobby" class="display-lobby">
+        <div class="display-mascot">🦉</div><h1>¡QUE EMPIECE LA FIESTA!</h1>
+        <p>Escanea el QR o entra en <b id="displayUrl"></b></p>
+        <div class="display-code large" id="displayLobbyCode">-----</div>
+        <div id="displayPlayers" class="display-players"></div>
+        <p class="muted">Hasta cuatro búhos · Dos pilotos por equipo · ¡Preparad los ejes!</p>
+        <button id="viewerStartBtn" class="btn primary hidden">¡Empezar partida!</button>
+      </div>
+      <div id="arenaWrap" class="arena-wrap hidden">
+        <div class="game-hud"><div id="timer" class="timer">01:30</div><div class="hud-title">¡ATRAPA EL TXAKOLI!</div><div id="scoreboard" class="scoreboard"></div></div>
+        <canvas id="arena" width="800" height="496"></canvas>
+        <button class="fullscreen-btn" type="button" aria-label="Activar pantalla completa" aria-pressed="false" title="Pantalla completa">⛶</button>
+        <div class="arena-footer">♪ HUEVO +1 &nbsp; ● POKÉBALL +2 &nbsp; ♫ TOKIOHOTEL +3 &nbsp; 🍾 TXAKOLI +5 &nbsp; ★ Miguel +10</div>
+      </div>
+      <div id="results" class="results hidden"><div class="result-confetti">🎉 ✨ 🎊</div><p class="eyebrow">MISIÓN CUMPLIDA</p><h1>¡FELIZ CUMPLEAÑOS!</h1><div id="winnerOwl" class="winner-owl">🦉</div><h2 id="winnerTitle">GRAN MAESTRO DEL TXAKOLI</h2><div id="ranking" class="ranking"></div><p class="birthday-line">Ahora deja el mando, coge una copa y disfruta de tu día. ¡Zorionak!</p><button id="newGameBtn" class="btn primary">Volver al lobby</button></div>
+    </section>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+@media(max-width:700px){.screen{padding:17px}.lobby-layout{grid-template-columns:1fr;margin:5vh auto;gap:20px}.qr-panel{order:-1}.qr-placeholder{aspect-ratio:auto;min-height:110px;flex-direction:row}.qr-placeholder span{font-size:2.5rem}.qr-panel p{display:none}.lobby-main h2{font-size:3.2rem}.code-box{gap:8px;flex-wrap:wrap}.code-box strong{font-size:1.6rem}.player-slots{grid-template-columns:1fr 1fr}.display-screen{padding:15px}.game-hud{flex-wrap:wrap}.hud-title{order:3;width:100%;text-align:center}.scoreboard{max-width:70%}.display-lobby{padding-top:9vh}}
+@media(orientation:portrait) and (max-width:700px){.controller-screen{padding:14px}.controller-head{font-size:.85rem}.controller-info{margin:12px 0}.playing-controller p{margin:8px}.joystick{width:min(58vw,250px);height:min(58vw,250px);margin:18px auto}.controller-tip{font-size:.75rem}}
+@media (max-width: 700px) {
+  .player-slots { grid-template-columns: 1fr; }
+  .team-slot-card { padding: 10px; }
+  .pilot-slots { grid-template-columns: 1fr 1fr; }
+  .mobile-game-hud { align-items: flex-start; flex-direction: column; }
+  .mobile-game-hud .scoreboard { justify-content: flex-start; max-width: 100%; }
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  .controller-screen { padding: 8px 14px; }
+  .controller-head, .controller-info { margin-bottom: 6px; }
+  .controller-info { padding: 7px 12px; margin-top: 6px; }
+  .mobile-game-hud { margin: 3px auto; }
+  #playerArena { max-height: 68vh; width: auto; max-width: 100%; margin: 0 auto; }
+  .mobile-arena-wrap { display: flex; justify-content: center; }
+  .mobile-arena-wrap .joystick { left: max(10px, calc((100% - min(100%, 110vh * 1.6129)) / 2 + 10px)); bottom: 10px; }
+  .joystick-instruction, .controller-tip { display: none; }
+}
